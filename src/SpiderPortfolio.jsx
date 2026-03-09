@@ -70,6 +70,33 @@ const G = () => (
     @keyframes lR4{0%,100%{transform:rotate(-34deg)}50%{transform:rotate(-11deg)}}
     @keyframes bB  {0%,100%{transform:scaleY(1) scaleX(1)}50%{transform:scaleY(.92) scaleX(1.06)}}
 
+    /* ── Spider-Man hero character ── */
+    @keyframes spFloat {0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-22px) rotate(2deg)}}
+    @keyframes spArmR  {0%,100%{transform:rotate(-18deg)}50%{transform:rotate(-62deg)}}
+    @keyframes spArmL  {0%,100%{transform:rotate(14deg)} 50%{transform:rotate(48deg)}}
+    @keyframes spLegR  {0%,100%{transform:rotate(-8deg)} 50%{transform:rotate(22deg)}}
+    @keyframes spLegL  {0%,100%{transform:rotate(7deg)}  50%{transform:rotate(-24deg)}}
+    @keyframes spWebL  {0%{stroke-dashoffset:110;opacity:0}18%{opacity:1}100%{stroke-dashoffset:0;opacity:.7}}
+    @keyframes bubblePop{0%{transform:scale(0) rotate(-5deg);opacity:0}70%{transform:scale(1.08) rotate(1deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+    @keyframes bubbleWave{0%,100%{transform:scale(1) rotate(0deg)}25%{transform:scale(1.04) rotate(-.8deg)}75%{transform:scale(.97) rotate(.6deg)}}
+    @keyframes typingDot{0%,80%,100%{opacity:0}40%{opacity:1}}
+    @keyframes heroEntrance{from{transform:translateX(120px) rotate(8deg);opacity:0}to{transform:translateX(0) rotate(0);opacity:1}}
+    @keyframes weblineGrow{from{stroke-dashoffset:300}to{stroke-dashoffset:0}}
+
+    .sp-body{animation:spFloat 4.5s ease-in-out infinite;transform-origin:130px 200px;}
+    .sp-arm-r{animation:spArmR 1.4s ease-in-out infinite;transform-origin:158px 170px;}
+    .sp-arm-l{animation:spArmL 1.4s ease-in-out infinite .22s;transform-origin:102px 170px;}
+    .sp-leg-r{animation:spLegR 1.4s ease-in-out infinite .12s;transform-origin:148px 310px;}
+    .sp-leg-l{animation:spLegL 1.4s ease-in-out infinite .34s;transform-origin:112px 310px;}
+    .sp-web  {animation:spWebL 2.4s ease-out infinite .8s;stroke-dasharray:110;stroke-dashoffset:110;}
+    .hero-spman{animation:heroEntrance .9s cubic-bezier(.2,.9,.4,1.1) .3s both;}
+    .bubble{animation:bubblePop .7s cubic-bezier(.2,.9,.4,1.15) 1.2s both;}
+    .bubble-idle{animation:bubbleWave 3.5s ease-in-out infinite 2s;}
+    .dot1{animation:typingDot 1.4s ease-in-out infinite .0s;}
+    .dot2{animation:typingDot 1.4s ease-in-out infinite .2s;}
+    .dot3{animation:typingDot 1.4s ease-in-out infinite .4s;}
+    .hero-webline{stroke-dasharray:300;animation:weblineGrow 1.2s ease-out .4s both;}
+
     /* ── utility ── */
     .a-slam{animation:slam .65s cubic-bezier(.2,.9,.4,1.3) both;}
     .a-up  {animation:fadeUp .75s ease-out both;}
@@ -548,6 +575,226 @@ const Nav = ({ act }) => {
     );
 };
 
+/* ══════════════════════════════════════════════════════════
+   SPIDER-MAN HERO CHARACTER — full body SVG with speech bubble
+══════════════════════════════════════════════════════════ */
+const SpiderManHero = () => {
+    const [typed, setTyped] = useState("");
+    const [showDots, setShowDots] = useState(true);
+    const msg = "Hey there! I'm your friendly neighborhood Spider-Man! 🕷️ Welcome to Vibol's portfolio — this guy codes as fast as I swing! 😄";
+
+    useEffect(() => {
+        let i = 0;
+        const pause = setTimeout(() => {
+            setShowDots(false);
+            const t = setInterval(() => {
+                i++;
+                setTyped(msg.slice(0, i));
+                if (i >= msg.length) clearInterval(t);
+            }, 38);
+            return () => clearInterval(t);
+        }, 1800);
+        return () => clearTimeout(pause);
+    }, []);
+
+    return (
+        <div className="hero-spman" style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
+
+            {/* Speech bubble */}
+            <div className="bubble bubble-idle" style={{
+                position: "relative", maxWidth: 280, padding: "14px 18px",
+                background: "white", borderRadius: "18px 18px 4px 18px",
+                boxShadow: "0 8px 32px rgba(0,0,0,.45), 0 0 0 3px #c0121a",
+                marginBottom: 8, zIndex: 10,
+            }}>
+                {/* Red stripe accent top */}
+                <div style={{
+                    position: "absolute", top: 0, left: 0, right: 0, height: 4, borderRadius: "18px 18px 0 0",
+                    background: "linear-gradient(to right,#c0121a,#0d1b4b)"
+                }} />
+                <p style={{
+                    fontFamily: "'Rajdhani',sans-serif", fontWeight: 600, fontSize: ".88rem",
+                    lineHeight: 1.55, color: "#0a0a0b", minHeight: 60
+                }}>
+                    {showDots
+                        ? <span>
+                            <span className="dot1" style={{ display: "inline-block", width: 7, height: 7, borderRadius: "50%", background: "#c0121a", margin: "0 2px" }} />
+                            <span className="dot2" style={{ display: "inline-block", width: 7, height: 7, borderRadius: "50%", background: "#c0121a", margin: "0 2px" }} />
+                            <span className="dot3" style={{ display: "inline-block", width: 7, height: 7, borderRadius: "50%", background: "#c0121a", margin: "0 2px" }} />
+                        </span>
+                        : typed
+                    }
+                    {!showDots && typed.length < msg.length && <span style={{ display: "inline-block", width: 2, height: "1em", background: "#c0121a", marginLeft: 2, verticalAlign: "middle", animation: "typingDot .7s ease-in-out infinite" }} />}
+                </p>
+                {/* Bubble tail */}
+                <div style={{
+                    position: "absolute", bottom: -14, right: 22, width: 0, height: 0,
+                    borderLeft: "8px solid transparent", borderRight: "8px solid transparent",
+                    borderTop: "14px solid white"
+                }} />
+                <div style={{
+                    position: "absolute", bottom: -18, right: 20, width: 0, height: 0,
+                    borderLeft: "10px solid transparent", borderRight: "10px solid transparent",
+                    borderTop: "16px solid #c0121a", zIndex: -1
+                }} />
+            </div>
+
+            {/* Spider-Man SVG */}
+            <svg viewBox="0 0 260 480" width="min(320px,42vw)" height="auto"
+                style={{ filter: "drop-shadow(0 0 48px rgba(192,18,26,.65)) drop-shadow(0 0 18px rgba(192,18,26,.3))", overflow: "visible" }}>
+                <defs>
+                    <linearGradient id="gRed" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#e74c3c" />
+                        <stop offset="60%" stopColor="#c0121a" />
+                        <stop offset="100%" stopColor="#8b0000" />
+                    </linearGradient>
+                    <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#2c3e8a" />
+                        <stop offset="100%" stopColor="#0d1b4b" />
+                    </linearGradient>
+                    <linearGradient id="gRedV" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#e74c3c" />
+                        <stop offset="100%" stopColor="#8b0000" />
+                    </linearGradient>
+                    <linearGradient id="gBlueV" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#2c3e8a" />
+                        <stop offset="100%" stopColor="#0a1240" />
+                    </linearGradient>
+                    <radialGradient id="gEye" cx="35%" cy="35%" r="60%">
+                        <stop offset="0%" stopColor="#ffffff" />
+                        <stop offset="60%" stopColor="#d0ecff" />
+                        <stop offset="100%" stopColor="#9ecfee" />
+                    </radialGradient>
+                    <filter id="spGlow" x="-40%" y="-40%" width="180%" height="180%">
+                        <feGaussianBlur stdDeviation="3" result="b" />
+                        <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                    </filter>
+                    <filter id="spGlowS" x="-60%" y="-60%" width="220%" height="220%">
+                        <feGaussianBlur stdDeviation="5" result="b" />
+                        <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                    </filter>
+                </defs>
+
+                {/* Web line from hand to top */}
+                <line className="sp-web hero-webline" x1="197" y1="138" x2="310" y2="-20"
+                    stroke="#f5c842" strokeWidth="2" strokeLinecap="round" filter="url(#spGlowS)" />
+                <line className="sp-web" x1="197" y1="138" x2="305" y2="-12"
+                    stroke="rgba(245,200,66,.3)" strokeWidth="1" strokeLinecap="round"
+                    style={{ animationDelay: ".15s" }} />
+
+                <g className="sp-body">
+                    {/* ── LEFT LEG ── */}
+                    <g className="sp-leg-l">
+                        <path d="M 104 318 Q 90 365 83 408" fill="none" stroke="url(#gBlueV)" strokeWidth="26" strokeLinecap="round" />
+                        <path d="M 83 408 Q 75 452 80 478" fill="none" stroke="url(#gRedV)" strokeWidth="20" strokeLinecap="round" />
+                        <ellipse cx="78" cy="482" rx="18" ry="9" fill="#c0121a" />
+                        {/* shoe sole */}
+                        <path d="M 60 482 Q 78 488 96 482" fill="none" stroke="#8b0000" strokeWidth="3" strokeLinecap="round" />
+                    </g>
+                    {/* ── RIGHT LEG ── */}
+                    <g className="sp-leg-r">
+                        <path d="M 156 318 Q 170 363 177 406" fill="none" stroke="url(#gBlueV)" strokeWidth="26" strokeLinecap="round" />
+                        <path d="M 177 406 Q 185 450 180 476" fill="none" stroke="url(#gRedV)" strokeWidth="20" strokeLinecap="round" />
+                        <ellipse cx="181" cy="480" rx="18" ry="9" fill="#c0121a" />
+                        <path d="M 163 480 Q 181 486 199 480" fill="none" stroke="#8b0000" strokeWidth="3" strokeLinecap="round" />
+                    </g>
+
+                    {/* ── TORSO ── */}
+                    <path d="M 96 178 Q 80 225 82 318 L 178 318 Q 180 225 164 178 Z" fill="url(#gBlue)" />
+                    {/* Red chest stripe */}
+                    <path d="M 108 182 Q 102 228 104 308 L 156 308 Q 158 228 152 182 Z" fill="url(#gRed)" />
+
+                    {/* Torso web lines */}
+                    <g stroke="rgba(0,0,0,.28)" strokeWidth=".9" fill="none">
+                        {[[-22, -52], [-12, -58], [0, -62], [12, -58], [22, -52], [30, -42], [34, -30], [32, -18], [-32, -18], [-34, -30], [-30, -42]].map(([dx, dy], i) => (
+                            <line key={i} x1="130" y1="248" x2={130 + dx * 1.6} y2={248 + dy * 1.3} />
+                        ))}
+                        <ellipse cx="130" cy="248" rx="18" ry="12" />
+                        <ellipse cx="130" cy="248" rx="35" ry="22" />
+                        <ellipse cx="130" cy="248" rx="52" ry="35" />
+                    </g>
+
+                    {/* Spider emblem on chest */}
+                    <g transform="translate(108,228)" filter="url(#spGlow)" opacity=".82">
+                        <path d="M22 2 L35 14 L31 40 L22 30 L13 40 L9 14 Z" fill="black" />
+                        <line x1="6" y1="13" x2="22" y2="20" stroke="black" strokeWidth="2" />
+                        <line x1="4" y1="24" x2="20" y2="24" stroke="black" strokeWidth="2" />
+                        <line x1="8" y1="35" x2="20" y2="28" stroke="black" strokeWidth="1.6" />
+                        <line x1="38" y1="13" x2="22" y2="20" stroke="black" strokeWidth="2" />
+                        <line x1="40" y1="24" x2="24" y2="24" stroke="black" strokeWidth="2" />
+                        <line x1="36" y1="35" x2="24" y2="28" stroke="black" strokeWidth="1.6" />
+                    </g>
+
+                    {/* ── RIGHT ARM (web hand) ── */}
+                    <g className="sp-arm-r">
+                        <path d="M 160 182 Q 190 158 205 138" fill="none" stroke="url(#gRed)" strokeWidth="23" strokeLinecap="round" />
+                        <path d="M 205 138 Q 218 122 202 132" fill="none" stroke="url(#gRed)" strokeWidth="18" strokeLinecap="round" />
+                        {/* web-shooting hand */}
+                        <ellipse cx="197" cy="138" rx="14" ry="10" fill="#9b0e16" transform="rotate(-22 197 138)" />
+                        {/* fingers extended for web */}
+                        <line x1="192" y1="130" x2="200" y2="120" stroke="#9b0e16" strokeWidth="4" strokeLinecap="round" />
+                        <line x1="198" y1="128" x2="208" y2="120" stroke="#9b0e16" strokeWidth="4" strokeLinecap="round" />
+                        <line x1="203" y1="132" x2="211" y2="126" stroke="#9b0e16" strokeWidth="3" strokeLinecap="round" />
+                        {/* web flash */}
+                        <circle cx="200" cy="126" r="5" fill="rgba(245,200,66,.6)" filter="url(#spGlowS)"
+                            style={{ animation: "typingDot .9s ease-in-out infinite" }} />
+                    </g>
+
+                    {/* ── LEFT ARM ── */}
+                    <g className="sp-arm-l">
+                        <path d="M 100 182 Q 72 205 57 228" fill="none" stroke="url(#gBlue)" strokeWidth="23" strokeLinecap="round" />
+                        <path d="M 57 228 Q 42 252 49 268" fill="none" stroke="url(#gBlue)" strokeWidth="18" strokeLinecap="round" />
+                        <ellipse cx="48" cy="268" rx="13" ry="9" fill="#0d1b4b" transform="rotate(16 48 268)" />
+                    </g>
+
+                    {/* ── NECK ── */}
+                    <rect x="120" y="162" width="20" height="24" rx="4" fill="url(#gRed)" />
+
+                    {/* ── HEAD ── */}
+                    <ellipse cx="130" cy="128" rx="46" ry="52" fill="url(#gRed)" />
+                    {/* Head shading */}
+                    <ellipse cx="130" cy="128" rx="46" ry="52" fill="rgba(0,0,0,.12)" />
+
+                    {/* Blue side panels on head */}
+                    <path d="M 84 120 Q 80 140 88 160 Q 102 170 122 164 Q 110 148 110 128 Q 110 110 115 98 Q 97 106 84 120Z" fill="url(#gBlue)" />
+                    <path d="M 176 120 Q 180 140 172 160 Q 158 170 138 164 Q 150 148 150 128 Q 150 110 145 98 Q 163 106 176 120Z" fill="url(#gBlue)" />
+
+                    {/* Head web lines */}
+                    <g stroke="rgba(0,0,0,.22)" strokeWidth=".9" fill="none">
+                        <path d="M 130 78 Q 152 98 165 124 Q 172 148 164 166" />
+                        <path d="M 130 78 Q 108 98 95 124 Q 88 148 96 166" />
+                        <path d="M 130 78 L 130 180" />
+                        <ellipse cx="130" cy="128" rx="24" ry="26" />
+                        <ellipse cx="130" cy="128" rx="40" ry="44" />
+                    </g>
+
+                    {/* ── EYES (large white lenses) ── */}
+                    <path d="M 90 116 Q 84 102 98 96 Q 116 88 123 103 Q 126 118 116 126 Q 102 133 90 116 Z"
+                        fill="url(#gEye)" filter="url(#spGlow)" />
+                    {/* Eye highlight */}
+                    <ellipse cx="101" cy="103" rx="5" ry="3.5" fill="white" opacity=".85" />
+                    <path d="M 170 116 Q 176 102 162 96 Q 144 88 137 103 Q 134 118 144 126 Q 158 133 170 116 Z"
+                        fill="url(#gEye)" filter="url(#spGlow)" />
+                    <ellipse cx="159" cy="103" rx="5" ry="3.5" fill="white" opacity=".85" />
+
+                    {/* ── eye outline ── */}
+                    <path d="M 90 116 Q 84 102 98 96 Q 116 88 123 103 Q 126 118 116 126 Q 102 133 90 116 Z"
+                        fill="none" stroke="rgba(0,0,0,.35)" strokeWidth="1.2" />
+                    <path d="M 170 116 Q 176 102 162 96 Q 144 88 137 103 Q 134 118 144 126 Q 158 133 170 116 Z"
+                        fill="none" stroke="rgba(0,0,0,.35)" strokeWidth="1.2" />
+                </g>
+            </svg>
+
+            {/* Ground shadow */}
+            <div style={{
+                width: 180, height: 16, borderRadius: "50%",
+                background: "radial-gradient(ellipse,rgba(192,18,26,.35),transparent 70%)",
+                marginTop: -12, filter: "blur(6px)"
+            }} />
+        </div>
+    );
+};
+
 /* ══════ CITY ══════ */
 const City = () => {
     const B = [{ w: 40, h: 108 }, { w: 56, h: 172 }, { w: 34, h: 128 }, { w: 72, h: 228 }, { w: 28, h: 96 }, { w: 50, h: 162 }, { w: 42, h: 192 }, { w: 66, h: 252 }, { w: 46, h: 142 }, { w: 88, h: 298 }, { w: 36, h: 172 }, { w: 60, h: 212 }, { w: 32, h: 106 }, { w: 70, h: 240 }, { w: 52, h: 188 }, { w: 44, h: 126 }, { w: 76, h: 226 }, { w: 30, h: 90 }, { w: 54, h: 198 }, { w: 48, h: 156 }, { w: 36, h: 112 }, { w: 64, h: 218 }, { w: 32, h: 94 }, { w: 80, h: 244 }, { w: 42, h: 132 }];
@@ -578,90 +825,114 @@ const City = () => {
 const Hero = () => (
     <section id="home" style={{
         position: "relative", minHeight: "100vh", display: "flex",
-        alignItems: "center", justifyContent: "center", overflow: "hidden", paddingTop: 66
+        alignItems: "center", overflow: "hidden", paddingTop: 66
     }}>
         <div className="wp" style={{ position: "absolute", inset: 0, opacity: .042, pointerEvents: "none" }} />
         <div className="scanlines" style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2 }} />
         <div style={{
             position: "absolute", inset: 0, pointerEvents: "none",
-            background: "radial-gradient(ellipse 65% 55% at 50% 35%,rgba(13,27,75,.6) 0%,transparent 70%)"
+            background: "radial-gradient(ellipse 70% 60% at 30% 50%,rgba(13,27,75,.65) 0%,transparent 70%)"
         }} />
         <div style={{
             position: "absolute", inset: 0, pointerEvents: "none",
-            background: "radial-gradient(ellipse 35% 45% at 83% 40%,rgba(192,18,26,.1) 0%,transparent 60%)"
+            background: "radial-gradient(ellipse 55% 60% at 80% 55%,rgba(192,18,26,.13) 0%,transparent 65%)"
         }} />
         <City />
 
-        {/* Swinging spider */}
-        <div className="a-swing" style={{ position: "absolute", top: 72, right: 16, zIndex: 4, pointerEvents: "none" }}>
-            <div style={{ width: 2, height: 86, background: "linear-gradient(to bottom,rgba(245,200,66,.75),rgba(245,200,66,.04))", margin: "0 auto" }} />
-            <Emblem size={56} className="a-float" style={{ filter: "drop-shadow(0 0 24px rgba(192,18,26,.9))", animationDuration: "2.8s" }} />
-        </div>
+        {/* Main hero grid — LEFT: text | RIGHT: Spider-Man */}
+        <div style={{
+            position: "relative", zIndex: 5, width: "100%", maxWidth: 1280, margin: "0 auto",
+            padding: "0 32px", display: "grid", gridTemplateColumns: "1fr 1fr",
+            alignItems: "center", gap: 24, minHeight: "calc(100vh - 66px)"
+        }}>
 
-        <div style={{ position: "relative", zIndex: 5, textAlign: "center", padding: "0 20px", maxWidth: 920, width: "100%" }}>
-            <p className="fj a-up d1" style={{ fontSize: ".7rem", letterSpacing: 8, color: "rgba(245,200,66,.8)", textTransform: "uppercase", marginBottom: 10 }}>
-                Your Friendly Neighborhood Developer · Phnom Penh, Cambodia
-            </p>
-            <Emblem size={128} className="a-float d2" style={{ margin: "0 auto 14px", display: "block" }} />
-            <h1 className="fb glitch a-slam d2" data-g="CHHORN VIBOL" style={{
-                fontSize: "clamp(2.8rem,11vw,7.5rem)", lineHeight: .9, letterSpacing: 6, color: "#f0f0f0",
-                textShadow: "5px 5px 0 #c0121a, 10px 10px 0 #0d1b4b, 0 0 60px rgba(192,18,26,.2)"
-            }}>
-                CHHORN VIBOL
-            </h1>
-            <p className="fbn a-up d4" style={{
-                fontSize: "clamp(.9rem,3.5vw,1.45rem)", letterSpacing: 8,
-                color: "rgba(245,200,66,.85)", marginTop: 12, marginBottom: 34, textTransform: "uppercase"
-            }}>
-                Front-End Developer · ICT Student · Spider-Man Fan
-            </p>
+            {/* ── LEFT: Portfolio text ── */}
+            <div style={{ padding: "20px 0" }}>
+                <p className="fj a-up d1" style={{
+                    fontSize: ".68rem", letterSpacing: 8,
+                    color: "rgba(245,200,66,.82)", textTransform: "uppercase", marginBottom: 14, display: "flex", alignItems: "center", gap: 10
+                }}>
+                    <span style={{ display: "inline-block", width: 30, height: 1, background: "#f5c842", opacity: .6 }} />
+                    Phnom Penh, Cambodia
+                </p>
 
-            {/* Stats */}
-            <div className="a-up d5" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10, maxWidth: 680, margin: "0 auto 36px" }}>
-                {STATS_DATA.map((s, i) => (
-                    <div key={i} className="chex rv" style={{
-                        padding: "13px 6px",
-                        background: "rgba(13,27,75,.22)", border: "1px solid rgba(192,18,26,.25)",
-                        textAlign: "center", animationDelay: i * .07 + "s"
-                    }}>
-                        <div className="fb" style={{ fontSize: "clamp(1.3rem,4vw,2rem)", letterSpacing: 3, color: "#f5c842" }}>{s.v}</div>
-                        <div className="fj" style={{ fontSize: ".58rem", letterSpacing: 2, color: "rgba(240,240,240,.42)", textTransform: "uppercase", marginTop: 2 }}>{s.l}</div>
-                    </div>
-                ))}
+                <Emblem size={72} className="a-float d1" style={{ marginBottom: 10, display: "block" }} />
+
+                <h1 className="fb glitch a-slam d2" data-g="CHHORN VIBOL" style={{
+                    fontSize: "clamp(2.6rem,8vw,6.5rem)", lineHeight: .88, letterSpacing: 4, color: "#f0f0f0",
+                    textShadow: "4px 4px 0 #c0121a, 8px 8px 0 #0d1b4b, 0 0 50px rgba(192,18,26,.2)",
+                    marginBottom: 14
+                }}>
+                    CHHORN<br /><span style={{ color: "#f5c842" }}>VIBOL</span>
+                </h1>
+
+                <p className="fbn a-up d4" style={{
+                    fontSize: "clamp(.85rem,2.5vw,1.2rem)", letterSpacing: 6,
+                    color: "rgba(245,200,66,.85)", marginBottom: 28, textTransform: "uppercase"
+                }}>
+                    Front-End Developer · ICT Student · Spider-Man Fan
+                </p>
+
+                {/* Stats grid */}
+                <div className="a-up d5" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, marginBottom: 30 }}>
+                    {STATS_DATA.map((s, i) => (
+                        <div key={i} className="chex" style={{
+                            padding: "11px 6px",
+                            background: "rgba(13,27,75,.28)", border: "1px solid rgba(192,18,26,.3)",
+                            textAlign: "center"
+                        }}>
+                            <div className="fb" style={{ fontSize: "clamp(1.1rem,3vw,1.7rem)", letterSpacing: 3, color: "#f5c842" }}>{s.v}</div>
+                            <div className="fj" style={{ fontSize: ".55rem", letterSpacing: 2, color: "rgba(240,240,240,.4)", textTransform: "uppercase", marginTop: 2 }}>{s.l}</div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* CTAs */}
+                <div className="a-up d6" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+                    <button onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })} data-c className="chex fb"
+                        style={{
+                            fontSize: "1rem", letterSpacing: 4, padding: "14px 32px", background: "#c0121a",
+                            color: "#fff", border: "none", boxShadow: "0 6px 28px rgba(192,18,26,.45)",
+                            animation: "pulseR 2.5s ease-in-out infinite", transition: "transform .22s"
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px) scale(1.04)"; }}
+                        onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
+                        VIEW MY WORK
+                    </button>
+                    <button onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })} data-c className="fb"
+                        style={{
+                            fontSize: "1rem", letterSpacing: 4, padding: "13px 28px", background: "transparent",
+                            color: "#f5c842", border: "2px solid #f5c842",
+                            boxShadow: "0 6px 28px rgba(245,200,66,.15)", transition: "all .22s"
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,200,66,.08)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = ""; }}>
+                        CONTACT ME
+                    </button>
+                </div>
             </div>
 
-            {/* CTAs */}
-            <div className="a-up d6" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-                <button onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })} data-c className="chex fb"
-                    style={{
-                        fontSize: "1rem", letterSpacing: 4, padding: "14px 36px", background: "#c0121a",
-                        color: "#fff", border: "none", boxShadow: "0 6px 28px rgba(192,18,26,.45)",
-                        animation: "pulseR 2.5s ease-in-out infinite", transition: "transform .22s"
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px) scale(1.04)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
-                    VIEW MY WORK
-                </button>
-                <button onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })} data-c className="fb"
-                    style={{
-                        fontSize: "1rem", letterSpacing: 4, padding: "13px 34px", background: "transparent",
-                        color: "#f5c842", border: "2px solid #f5c842",
-                        boxShadow: "0 6px 28px rgba(245,200,66,.15)", transition: "all .22s"
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,200,66,.08)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = ""; }}>
-                    CONTACT ME
-                </button>
+            {/* ── RIGHT: Spider-Man character ── */}
+            <div style={{
+                display: "flex", alignItems: "center", justifyContent: "center",
+                paddingBottom: 40, paddingTop: 20
+            }}>
+                <SpiderManHero />
             </div>
-        </div>
 
+        </div>{/* end grid */}
+
+        {/* Scroll nudge */}
         <div className="a-in d8" style={{
-            position: "absolute", bottom: 30, left: "50%", transform: "translateX(-50%)",
+            position: "absolute", bottom: 22, left: "50%", transform: "translateX(-50%)",
             display: "flex", flexDirection: "column", alignItems: "center", gap: 7, zIndex: 5
         }}>
-            <div className="fj" style={{ fontSize: ".6rem", letterSpacing: 6, color: "rgba(240,240,240,.22)", textTransform: "uppercase" }}>scroll</div>
+            <div className="fj" style={{ fontSize: ".6rem", letterSpacing: 6, color: "rgba(240,240,240,.2)", textTransform: "uppercase" }}>scroll</div>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#c0121a", animation: "pulseR 1.8s ease-in-out infinite" }} />
         </div>
+
+        {/* Responsive: stack on mobile */}
+        <style>{`@media(max-width:768px){#home>div:nth-child(6){grid-template-columns:1fr!important;}}`}</style>
     </section>
 );
 
