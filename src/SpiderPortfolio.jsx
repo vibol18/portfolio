@@ -1,4 +1,12 @@
 import { useState, useEffect, useRef } from "react";
+import {
+    FaLaptopCode, FaPalette, FaServer, FaTerminal,
+    FaGraduationCap, FaDraftingCompass,
+    FaDumbbell, FaBookOpen, FaBullseye, FaHandshake,
+    FaSpider, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaGithub,
+    FaReact, FaCss3Alt, FaJs, FaPhp, FaUserGraduate
+} from "react-icons/fa";
+import { SiMysql } from "react-icons/si";
 
 /* ══════════════════════════════════════════════════════════
    GLOBAL STYLES
@@ -121,6 +129,28 @@ const G = () => (
     .rr {opacity:0;transform:translateX(44px);transition:opacity .65s ease,transform .65s ease;}
     .rr.on{opacity:1;transform:translateX(0);}
 
+    /* ══ 3D SKILLS CUBE ══ */
+    .cube-scene{perspective:1100px;display:flex;align-items:center;justify-content:center;padding:10px 0 0;height:calc(var(--cube) + 118px);--cube:min(280px,76vw);}
+    .cube{position:relative;width:var(--cube);height:var(--cube);transform-style:preserve-3d;touch-action:none;cursor:grab;user-select:none;}
+    .cube:active{cursor:grabbing;}
+    .cube-face{
+      position:absolute;inset:0;border-radius:14px;overflow:hidden;
+      backface-visibility:hidden;-webkit-backface-visibility:hidden;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:18px 18px 16px;text-align:center;
+      background:linear-gradient(160deg,rgba(13,27,75,.88),rgba(4,8,15,.94));
+      border:1px solid rgba(192,18,26,.4);
+      box-shadow:inset 0 0 42px rgba(0,0,0,.65),0 0 34px rgba(192,18,26,.14);
+    }
+    .cube-front {transform:rotateY(0deg)   translateZ(calc(var(--cube)/2));}
+    .cube-right {transform:rotateY(90deg)  translateZ(calc(var(--cube)/2));}
+    .cube-back  {transform:rotateY(180deg) translateZ(calc(var(--cube)/2));}
+    .cube-left  {transform:rotateY(-90deg) translateZ(calc(var(--cube)/2));}
+    .cube-top   {transform:rotateX(90deg)  translateZ(calc(var(--cube)/2));}
+    .cube-bottom{transform:rotateX(-90deg) translateZ(calc(var(--cube)/2));}
+    .cube-btn{transition:all .2s;}
+    .cube-btn.on{background:#c0121a!important;color:#fff!important;border-color:#c0121a!important;box-shadow:0 0 18px rgba(192,18,26,.5);}
+
     /* ── skill bar ── */
     .bar{transform:scaleX(0);transform-origin:left;animation:barFill 1.3s cubic-bezier(.4,0,.2,1) forwards;}
 
@@ -217,19 +247,19 @@ const NAVS = ["HOME", "ABOUT", "SKILLS", "EDUCATION", "PROJECTS", "CONTACT"];
 
 const SKILLS_DATA = [
     {
-        icon: "🌐", cat: "Frontend", col: "#c0121a",
+        icon: FaLaptopCode, cat: "Frontend", col: "#c0121a",
         items: [{ n: "HTML / CSS", p: 92 }, { n: "JavaScript", p: 85 }, { n: "React.js", p: 82 }, { n: "Bootstrap & Tailwind", p: 88 }]
     },
     {
-        icon: "🎨", cat: "UI & Design", col: "#8a6f0a",
+        icon: FaPalette, cat: "UI & Design", col: "#8a6f0a",
         items: [{ n: "Web Design", p: 80 }, { n: "Responsive Layout", p: 88 }, { n: "Front-end Dev", p: 84 }, { n: "UI Prototyping", p: 75 }]
     },
     {
-        icon: "⚙️", cat: "Backend", col: "#1a2d6e",
+        icon: FaServer, cat: "Backend", col: "#1a2d6e",
         items: [{ n: "PHP / Laravel", p: 72 }, { n: "MySQL", p: 75 }, { n: "Ajax", p: 68 }, { n: "REST Concepts", p: 65 }]
     },
     {
-        icon: "💻", cat: "Other Tech", col: "#0a5e3a",
+        icon: FaTerminal, cat: "Other Tech", col: "#0a5e3a",
         items: [{ n: "C / C++", p: 70 }, { n: "Java", p: 65 }, { n: "Git / GitHub", p: 78 }, { n: "Problem-Solving", p: 82 }]
     },
 ];
@@ -240,7 +270,7 @@ const EDU_DATA = [
         deg: "Bachelor's Degree in ICT Management",
         sch: "Norton University",
         desc: "Currently enrolled. Focused on ICT management, systems thinking, and technology leadership. Actively building real-world front-end projects alongside coursework.",
-        icon: "🎓",
+        icon: FaGraduationCap,
         badge: "Current Student",
     },
     {
@@ -248,7 +278,7 @@ const EDU_DATA = [
         deg: "Bachelor's Degree in Information Technology",
         sch: "ETEC Center",
         desc: "Hands-on program covering full-stack fundamentals including HTML, CSS, JavaScript, PHP, MySQL, and ReactJS development.",
-        icon: "📐",
+        icon: FaDraftingCompass,
         badge: "Enrolled",
     },
 ];
@@ -292,10 +322,10 @@ const STATS_DATA = [
 ];
 
 const QUALITIES = [
-    { ic: "💪", q: "Hardworking", d: "Always putting in full effort to complete tasks and exceed expectations." },
-    { ic: "📚", q: "Eager to Learn", d: "Continuously seeking new knowledge in technology and development." },
-    { ic: "🎯", q: "Responsible & Punctual", d: "Committed to delivering work on time and taking ownership of tasks." },
-    { ic: "🤝", q: "Team Player", d: "Works effectively both independently and within a collaborative team." },
+    { ic: FaDumbbell, q: "Hardworking", d: "Always putting in full effort to complete tasks and exceed expectations." },
+    { ic: FaBookOpen, q: "Eager to Learn", d: "Continuously seeking new knowledge in technology and development." },
+    { ic: FaBullseye, q: "Responsible & Punctual", d: "Committed to delivering work on time and taking ownership of tasks." },
+    { ic: FaHandshake, q: "Team Player", d: "Works effectively both independently and within a collaborative team." },
 ];
 
 const LANGS = [
@@ -581,7 +611,7 @@ const Nav = ({ act }) => {
 const SpiderManHero = () => {
     const [typed, setTyped] = useState("");
     const [showDots, setShowDots] = useState(true);
-    const msg = "Hey there! I'm your friendly neighborhood Spider-Man! 🕷️ Welcome to Vibol's portfolio — this guy codes as fast as I swing! 😄";
+    const msg = "Hey there! I'm your friendly neighborhood Spider-Man! Welcome to Vibol's portfolio — this guy codes as fast as I swing!";
 
     useEffect(() => {
         let i = 0;
@@ -640,8 +670,8 @@ const SpiderManHero = () => {
             </div>
 
             {/* Spider-Man SVG */}
-            <svg viewBox="0 0 260 480" width="min(320px,42vw)" height="auto"
-                style={{ filter: "drop-shadow(0 0 48px rgba(192,18,26,.65)) drop-shadow(0 0 18px rgba(192,18,26,.3))", overflow: "visible" }}>
+            <svg viewBox="0 0 260 480" width="min(320px,42vw)"
+                style={{ aspectRatio: "260 / 480", filter: "drop-shadow(0 0 48px rgba(192,18,26,.65)) drop-shadow(0 0 18px rgba(192,18,26,.3))", overflow: "visible" }}>
                 <defs>
                     <linearGradient id="gRed" x1="0" y1="0" x2="1" y2="1">
                         <stop offset="0%" stopColor="#e74c3c" />
@@ -796,30 +826,39 @@ const SpiderManHero = () => {
 };
 
 /* ══════ CITY ══════ */
-const City = () => {
-    const B = [{ w: 40, h: 108 }, { w: 56, h: 172 }, { w: 34, h: 128 }, { w: 72, h: 228 }, { w: 28, h: 96 }, { w: 50, h: 162 }, { w: 42, h: 192 }, { w: 66, h: 252 }, { w: 46, h: 142 }, { w: 88, h: 298 }, { w: 36, h: 172 }, { w: 60, h: 212 }, { w: 32, h: 106 }, { w: 70, h: 240 }, { w: 52, h: 188 }, { w: 44, h: 126 }, { w: 76, h: 226 }, { w: 30, h: 90 }, { w: 54, h: 198 }, { w: 48, h: 156 }, { w: 36, h: 112 }, { w: 64, h: 218 }, { w: 32, h: 94 }, { w: 80, h: 244 }, { w: 42, h: 132 }];
-    return (
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 1, pointerEvents: "none", display: "flex", alignItems: "flex-end", gap: 3, padding: "0 4px" }}>
-            {B.map((b, i) => (
-                <div key={i} style={{
-                    position: "relative", flexShrink: 0, width: b.w, height: b.h,
-                    background: "linear-gradient(to top,#07101e,#0d1b4b)", borderTop: "2px solid rgba(255,255,255,.04)"
-                }}>
-                    {[...Array(Math.floor(Math.random() * 5) + 2)].map((_, j) => (
-                        <div key={j} style={{
-                            position: "absolute", width: 4, height: 5,
-                            background: `rgba(245,200,66,${.38 + Math.random() * .55})`,
-                            boxShadow: "0 0 6px rgba(245,200,66,.5)",
-                            left: Math.random() * (b.w - 12) + 4, top: Math.random() * (b.h - 24) + 12,
-                            animation: `winBlk ${2.5 + Math.random() * 3}s ease-in-out ${Math.random() * 4}s infinite`
-                        }} />
-                    ))}
-                </div>
-            ))}
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top,#04080f 0%,transparent 52%)" }} />
-        </div>
-    );
-};
+const CITY_BUILDINGS = [{ w: 40, h: 108 }, { w: 56, h: 172 }, { w: 34, h: 128 }, { w: 72, h: 228 }, { w: 28, h: 96 }, { w: 50, h: 162 }, { w: 42, h: 192 }, { w: 66, h: 252 }, { w: 46, h: 142 }, { w: 88, h: 298 }, { w: 36, h: 172 }, { w: 60, h: 212 }, { w: 32, h: 106 }, { w: 70, h: 240 }, { w: 52, h: 188 }, { w: 44, h: 126 }, { w: 76, h: 226 }, { w: 30, h: 90 }, { w: 54, h: 198 }, { w: 48, h: 156 }, { w: 36, h: 112 }, { w: 64, h: 218 }, { w: 32, h: 94 }, { w: 80, h: 244 }, { w: 42, h: 132 }];
+const CITY_LIGHTS = CITY_BUILDINGS.map(b => {
+    const n = Math.floor(Math.random() * 5) + 2;
+    return [...Array(n)].map(() => ({
+        left: Math.random() * (b.w - 12) + 4,
+        top: Math.random() * (b.h - 24) + 12,
+        opacity: .38 + Math.random() * .55,
+        dur: 2.5 + Math.random() * 3,
+        delay: Math.random() * 4,
+    }));
+});
+
+const City = () => (
+    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 1, pointerEvents: "none", display: "flex", alignItems: "flex-end", gap: 3, padding: "0 4px" }}>
+        {CITY_BUILDINGS.map((b, i) => (
+            <div key={i} style={{
+                position: "relative", flexShrink: 0, width: b.w, height: b.h,
+                background: "linear-gradient(to top,#07101e,#0d1b4b)", borderTop: "2px solid rgba(255,255,255,.04)"
+            }}>
+                {CITY_LIGHTS[i].map((w, j) => (
+                    <div key={j} style={{
+                        position: "absolute", width: 4, height: 5,
+                        background: `rgba(245,200,66,${w.opacity})`,
+                        boxShadow: "0 0 6px rgba(245,200,66,.5)",
+                        left: w.left, top: w.top,
+                        animation: `winBlk ${w.dur}s ease-in-out ${w.delay}s infinite`
+                    }} />
+                ))}
+            </div>
+        ))}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top,#04080f 0%,transparent 52%)" }} />
+    </div>
+);
 
 /* ══════ HERO ══════ */
 const Hero = () => (
@@ -1004,10 +1043,10 @@ const About = () => (
                                 width: 120, height: 120, borderRadius: "50%", border: "3px solid #f5c842",
                                 background: "linear-gradient(135deg,#1a2d6e,#c0121a)",
                                 display: "flex", alignItems: "center", justifyContent: "center",
-                                fontSize: "4rem", marginBottom: 16, zIndex: 1,
+                                marginBottom: 16, zIndex: 1,
                                 boxShadow: "0 0 24px rgba(192,18,26,.6)"
                             }}>
-                                🕷️
+                                <FaSpider size={56} color="#f5c842" />
                             </div>
                             <div className="fb" style={{ fontSize: "1.6rem", letterSpacing: 3, color: "#f0f0f0", zIndex: 1 }}>CHHORN VIBOL</div>
                             <div className="fbn" style={{ fontSize: ".9rem", letterSpacing: 5, color: "#f5c842", marginTop: 4, zIndex: 1 }}>FRONT-END DEVELOPER</div>
@@ -1029,17 +1068,17 @@ const About = () => (
                         display: "flex", flexDirection: "column", alignItems: "center",
                         justifyContent: "center", padding: 26, textAlign: "center"
                     }}>
-                        <div style={{ fontSize: "2.8rem", marginBottom: 10 }}>👨‍💻</div>
+                        <div style={{ marginBottom: 10 }}><FaUserGraduate size={44} color="#f5c842" /></div>
                         <div className="fb" style={{ fontSize: "1.3rem", letterSpacing: 4, color: "#f5c842", marginBottom: 8 }}>ICT MANAGEMENT</div>
-                        <div className="fj" style={{ fontSize: ".62rem", letterSpacing: 3, color: "rgba(255,255,255,.5)", marginBottom: 12, textTransform: "uppercase" }}>
-                            📍 Phnom Penh, Cambodia
+                        <div className="fj" style={{ fontSize: ".62rem", letterSpacing: 3, color: "rgba(255,255,255,.5)", marginBottom: 12, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6, justifyContent: "center" }}>
+                            <FaMapMarkerAlt size={12} color="#f5c842" /> Phnom Penh, Cambodia
                         </div>
                         <p className="fr" style={{ fontSize: ".86rem", lineHeight: 1.7, color: "rgba(255,255,255,.88)", marginBottom: 14 }}>
                             Motivated ICT student passionate about Front-End Development. Skilled in HTML, CSS, JavaScript & ReactJS.
                         </p>
                         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center" }}>
-                            {["⚡ React", "🎨 CSS", "🕸 JS", "🐘 PHP", "🗄 MySQL"].map(t => (
-                                <span key={t} className="tag">{t}</span>
+                            {[{ Icon: FaReact, t: "React" }, { Icon: FaCss3Alt, t: "CSS" }, { Icon: FaJs, t: "JS" }, { Icon: FaPhp, t: "PHP" }, { Icon: SiMysql, t: "MySQL" }].map(s => (
+                                <span key={s.t} className="tag" style={{ gap: 6 }}><s.Icon size={12} />{s.t}</span>
                             ))}
                         </div>
                     </div>
@@ -1085,65 +1124,139 @@ const About = () => (
 );
 
 /* ══════════════════════════════════════════════════════════
-   SKILLS — 180° flip cards
-══════════════════════════════════════════════════════════ */
-const SkillCard = ({ s, si }) => {
-    const ref = useRef();
-    const [triggered, setTriggered] = useState(false);
+   SKILLS — interactive 3D rotating cube
+   ══════════════════════════════════════════════════════════ */
+const CUBE_FACE_BTNS = [
+    { key: "overview", label: "Overview",    x: -12, y: 0 },
+    { key: "frontend", label: "Frontend",    x: -10, y: -90 },
+    { key: "design",   label: "UI & Design", x: -10, y: -180 },
+    { key: "backend",  label: "Backend",     x: -10, y: 90 },
+    { key: "other",    label: "Other Tech",  x: -88, y: 0 },
+    { key: "quote",    label: "Spider",      x: 88,  y: 0 },
+];
+
+const SKILL_FACE_CLASS = ["cube-right", "cube-back", "cube-left", "cube-top"];
+
+const CubeSkillFace = ({ s, seen, i }) => (
+    <>
+        <s.icon size={42} color="#f5c842" style={{ filter: `drop-shadow(0 0 14px ${s.col})`, marginBottom: 4 }} />
+        <div className="fb" style={{ fontSize: "1.15rem", letterSpacing: 4, color: "#f5c842", textShadow: `0 0 14px ${s.col}` }}>{s.cat.toUpperCase()}</div>
+        <div style={{ width: 34, height: 2, background: `linear-gradient(to right,transparent,${s.col},transparent)`, margin: "6px auto 10px" }} />
+        {s.items.map((it, j) => (
+            <div key={it.n} style={{ width: "100%", marginBottom: j === s.items.length - 1 ? 0 : 8 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3, gap: 8 }}>
+                    <span className="fj" style={{ fontSize: ".58rem", color: "rgba(240,240,240,.6)", letterSpacing: 1, textAlign: "left" }}>{it.n}</span>
+                    <span className="fj" style={{ fontSize: ".58rem", color: "#f5c842" }}>{it.p}%</span>
+                </div>
+                <div style={{ height: 3, borderRadius: 2, background: "rgba(255,255,255,.08)", overflow: "hidden" }}>
+                    {seen && (
+                        <div className="bar" style={{
+                            height: "100%", width: it.p + "%", borderRadius: 2,
+                            background: `linear-gradient(to right,${s.col},#f5c842)`,
+                            boxShadow: `0 0 8px ${s.col}70`, animationDelay: (i * .12 + j * .08) + "s"
+                        }} />
+                    )}
+                </div>
+            </div>
+        ))}
+    </>
+);
+
+const SkillsCube = () => {
+    const cubeRef = useRef(null);
+    const wrapRef = useRef(null);
+    const st = useRef({ x: -12, y: -30, dragging: false, sx: 0, sy: 0, bx: -12, by: -30, target: null, pauseFrames: 0 });
+    const [active, setActive] = useState("overview");
+    const [seen, setSeen] = useState(false);
+
     useEffect(() => {
-        const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setTriggered(true); io.disconnect(); } }, { threshold: .2 });
-        if (ref.current) io.observe(ref.current);
+        const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setSeen(true); io.disconnect(); } }, { threshold: .2 });
+        if (wrapRef.current) io.observe(wrapRef.current);
         return () => io.disconnect();
     }, []);
 
+    useEffect(() => {
+        let raf;
+        let last = performance.now();
+        const tick = now => {
+            const dt = Math.min(50, now - last);
+            last = now;
+            const s = st.current;
+            if (s.target) {
+                s.x += (s.target.x - s.x) * .1;
+                s.y += (s.target.y - s.y) * .1;
+                if (Math.abs(s.target.x - s.x) < .4 && Math.abs(s.target.y - s.y) < .4) {
+                    s.x = s.target.x; s.y = s.target.y; s.target = null;
+                }
+            } else if (!s.dragging) {
+                if (s.pauseFrames > 0) s.pauseFrames -= 1;
+                else s.y += dt * .022; // auto-spin
+            }
+            if (cubeRef.current) cubeRef.current.style.transform = `rotateX(${s.x}deg) rotateY(${s.y}deg)`;
+            raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(raf);
+    }, []);
+
+    const nearestY = (cur, base) => base + 360 * Math.round((cur - base) / 360);
+    const goTo = face => {
+        const s = st.current;
+        s.pauseFrames = 400;
+        s.target = { x: face.x, y: nearestY(s.y, face.y) };
+        setActive(face.key);
+    };
+    const onPointerDown = e => {
+        const s = st.current;
+        s.dragging = true; s.target = null;
+        s.sx = e.clientX; s.sy = e.clientY; s.bx = s.x; s.by = s.y;
+        s.pauseFrames = 400;
+        setActive(null);
+        e.currentTarget.setPointerCapture?.(e.pointerId);
+    };
+    const onPointerMove = e => {
+        const s = st.current;
+        if (!s.dragging) return;
+        s.y = s.by + (e.clientX - s.sx) * .45;
+        s.x = Math.max(-95, Math.min(95, s.bx - (e.clientY - s.sy) * .35));
+    };
+    const endDrag = () => { st.current.dragging = false; st.current.pauseFrames = 240; };
+
     return (
-        <div ref={ref} className="rv flip-w" style={{ animationDelay: si * .1 + "s", height: 260 }}>
-            <div className="flip-i">
-                {/* FRONT */}
-                <div className="flip-f ccorn" style={{
-                    padding: "26px 22px",
-                    background: "linear-gradient(135deg,rgba(13,27,75,.3),rgba(4,8,15,.75))",
-                    border: "1px solid rgba(192,18,26,.2)", borderTop: `3px solid ${s.col}`
-                }}>
-                    <div style={{ fontSize: "2rem", marginBottom: 10 }}>{s.icon}</div>
-                    <div className="fb" style={{ fontSize: "1.25rem", letterSpacing: 4, color: "#f5c842", marginBottom: 16 }}>{s.cat}</div>
-                    {s.items.map(it => (
-                        <div key={it.n} style={{ marginBottom: 10 }}>
-                            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-                                <span className="fj" style={{ fontSize: ".65rem", color: "rgba(240,240,240,.56)", letterSpacing: 1 }}>{it.n}</span>
-                                <span className="fj" style={{ fontSize: ".65rem", color: "#f5c842" }}>{it.p}%</span>
-                            </div>
-                            <div style={{ height: 4, borderRadius: 2, background: "rgba(255,255,255,.07)", overflow: "hidden" }}>
-                                {triggered && (
-                                    <div className="bar" style={{
-                                        height: "100%", width: it.p + "%", borderRadius: 2,
-                                        background: `linear-gradient(to right,${s.col},#f5c842)`,
-                                        boxShadow: `0 0 8px ${s.col}70`, animationDelay: si * .1 + "s"
-                                    }} />
-                                )}
-                            </div>
+        <div ref={wrapRef}>
+            <div className="cube-scene">
+                <div ref={cubeRef} className="cube"
+                    onPointerDown={onPointerDown} onPointerMove={onPointerMove}
+                    onPointerUp={endDrag} onPointerCancel={endDrag} onPointerLeave={endDrag}>
+                    {/* FRONT — overview */}
+                    <div className="cube-face cube-front" style={{ background: "linear-gradient(165deg,#1a2d6e 0%,#0d1b4b 45%,#3d060a 100%)", border: "1px solid rgba(245,200,66,.4)" }}>
+                        <Emblem size={96} style={{ marginBottom: 8 }} />
+                        <div className="fb" style={{ fontSize: "1.8rem", letterSpacing: 6, lineHeight: 1.05, color: "#f0f0f0", textShadow: "2px 2px 0 #c0121a" }}>CHHORN<br />VIBOL</div>
+                        <div className="fbn" style={{ fontSize: ".68rem", letterSpacing: 5, color: "#f5c842", marginTop: 6 }}>SKILLS LOADOUT</div>
+                        <div className="fj" style={{ fontSize: ".52rem", letterSpacing: 3, color: "rgba(240,240,240,.35)", marginTop: 14, textTransform: "uppercase" }}>Drag to spin · tap a button</div>
+                    </div>
+                    {/* SIDE FACES — the 4 skill categories */}
+                    {SKILLS_DATA.map((s, i) => (
+                        <div key={s.cat} className={`cube-face ${SKILL_FACE_CLASS[i]}`}>
+                            <CubeSkillFace s={s} seen={seen} i={i} />
                         </div>
                     ))}
+                    {/* BOTTOM — spider quote */}
+                    <div className="cube-face cube-bottom" style={{ background: "linear-gradient(160deg,#c0121a 0%,#3d060a 60%,#04080f 100%)", border: "1px solid rgba(245,200,66,.45)" }}>
+                        <FaSpider size={52} color="#f5c842" style={{ filter: "drop-shadow(0 0 14px rgba(245,200,66,.5))", marginBottom: 12 }} />
+                        <div className="fb" style={{ fontSize: "1rem", letterSpacing: 2, lineHeight: 1.55, color: "#f0f0f0", maxWidth: 230 }}>WITH GREAT POWER COMES GREAT RESPONSIBILITY</div>
+                        <div className="fj" style={{ fontSize: ".55rem", letterSpacing: 4, color: "rgba(255,255,255,.45)", marginTop: 12 }}>— SPIDER-MAN</div>
+                    </div>
                 </div>
-                {/* BACK */}
-                <div className="flip-b ccorn" style={{
-                    background: `linear-gradient(135deg,${s.col}28,#04080f)`,
-                    border: `2px solid ${s.col}`,
-                    display: "flex", flexDirection: "column", alignItems: "center",
-                    justifyContent: "center", padding: 22, textAlign: "center"
-                }}>
-                    <div style={{ fontSize: "3rem", marginBottom: 12, filter: `drop-shadow(0 0 12px ${s.col})` }}>{s.icon}</div>
-                    <div className="fb" style={{
-                        fontSize: "1.5rem", letterSpacing: 4, color: "#f5c842", marginBottom: 8,
-                        textShadow: `0 0 14px ${s.col}`
-                    }}>{s.cat}</div>
-                    <div style={{ width: 36, height: 2, background: `linear-gradient(to right,transparent,${s.col},transparent)`, margin: "0 auto 12px" }} />
-                    {s.items.map(it => (
-                        <div key={it.n} className="fj" style={{ fontSize: ".7rem", letterSpacing: 2, color: "rgba(240,240,240,.72)", marginBottom: 5 }}>
-                            {it.n} <span style={{ color: "#f5c842" }}>·</span> <span style={{ color: "#f5c842" }}>{it.p}%</span>
-                        </div>
-                    ))}
-                </div>
+            </div>
+            {/* Face navigation */}
+            <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginTop: 8 }}>
+                {CUBE_FACE_BTNS.map(f => (
+                    <button key={f.key} onClick={() => goTo(f)} data-c className={`cube-btn fj${active === f.key ? " on" : ""}`}
+                        style={{ fontSize: ".58rem", letterSpacing: 3, textTransform: "uppercase", padding: "8px 14px", background: "rgba(13,27,75,.35)", border: "1px solid rgba(192,18,26,.4)", color: "rgba(240,240,240,.75)", borderRadius: 4 }}>
+                        {f.label}
+                    </button>
+                ))}
             </div>
         </div>
     );
@@ -1156,9 +1269,7 @@ const Skills = () => (
     }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <ST pre="MY" acc="SKILLS" />
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))", gap: 20 }}>
-                {SKILLS_DATA.map((s, si) => <SkillCard key={s.cat} s={s} si={si} />)}
-            </div>
+            <SkillsCube />
         </div>
     </section>
 );
@@ -1175,9 +1286,9 @@ const Education = () => (
                         position: "absolute", left: -58, top: 16, width: 44, height: 44, borderRadius: "50%",
                         background: "linear-gradient(135deg,#c0121a,#0d1b4b)", border: "2px solid #f5c842",
                         boxShadow: "0 0 18px rgba(192,18,26,.5)",
-                        display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.3rem"
+                        display: "flex", alignItems: "center", justifyContent: "center"
                     }}>
-                        {e.icon}
+                        <e.icon size={22} color="#f0f0f0" />
                     </div>
                     <div className="ccsm card-pro" style={{
                         padding: "22px 26px",
@@ -1278,7 +1389,7 @@ const Qualities = () => (
                         background: "linear-gradient(135deg,rgba(13,27,75,.28),rgba(4,8,15,.72))",
                         border: "1px solid rgba(192,18,26,.2)", borderTop: "3px solid #c0121a",
                     }}>
-                        <div style={{ fontSize: "2.2rem", marginBottom: 10 }}>{q.ic}</div>
+                        <div style={{ marginBottom: 10 }}><q.ic size={36} color="#f5c842" /></div>
                         <div className="fb" style={{ fontSize: "1.15rem", letterSpacing: 3, color: "#f5c842", marginBottom: 8 }}>{q.q}</div>
                         <p className="fr" style={{ fontSize: ".9rem", lineHeight: 1.7, color: "rgba(240,240,240,.62)" }}>{q.d}</p>
                     </div>
@@ -1308,13 +1419,13 @@ const Contact = () => (
                 marginBottom: 32, textAlign: "left"
             }}>
                 {[
-                    { lb: "📞 Phone", val: "+855 96-6051-926" },
-                    { lb: "📧 Email", val: "chhornvibol19@gmail.com" },
-                    { lb: "🐙 GitHub", val: "github.com/vibol18" },
-                    { lb: "📍 Location", val: "Phnom Penh, Cambodia" },
+                    { lb: "Phone", Icon: FaPhoneAlt, val: "+855 96-6051-926" },
+                    { lb: "Email", Icon: FaEnvelope, val: "chhornvibol19@gmail.com" },
+                    { lb: "GitHub", Icon: FaGithub, val: "github.com/vibol18" },
+                    { lb: "Location", Icon: FaMapMarkerAlt, val: "Phnom Penh, Cambodia" },
                 ].map(s => (
                     <div key={s.lb} style={{ padding: "16px 20px", borderBottom: "1px solid rgba(192,18,26,.15)" }}>
-                        <div className="fj" style={{ fontSize: ".62rem", letterSpacing: 3, color: "rgba(192,18,26,.9)", textTransform: "uppercase", marginBottom: 4 }}>{s.lb}</div>
+                        <div className="fj" style={{ fontSize: ".62rem", letterSpacing: 3, color: "rgba(192,18,26,.9)", textTransform: "uppercase", marginBottom: 6, display: "flex", alignItems: "center", gap: 8 }}><s.Icon size={13} color="#c0121a" />{s.lb}</div>
                         <div className="fr" style={{ fontSize: ".95rem", color: "rgba(240,240,240,.82)", letterSpacing: 1 }}>{s.val}</div>
                     </div>
                 ))}
@@ -1322,9 +1433,9 @@ const Contact = () => (
 
             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginBottom: 36 }}>
                 {[
-                    { ic: "📧", lb: "EMAIL", href: "mailto:chhornvibol19@gmail.com" },
-                    { ic: "🐙", lb: "GITHUB", href: "https://github.com/vibol18" },
-                    { ic: "📞", lb: "CALL", href: "tel:+85596605192" },
+                    { Icon: FaEnvelope, lb: "EMAIL", href: "mailto:chhornvibol19@gmail.com" },
+                    { Icon: FaGithub, lb: "GITHUB", href: "https://github.com/vibol18" },
+                    { Icon: FaPhoneAlt, lb: "CALL", href: "tel:+85596605192" },
                 ].map(s => (
                     <a key={s.lb} href={s.href} data-c className="fb chex"
                         style={{
@@ -1335,7 +1446,7 @@ const Contact = () => (
                         }}
                         onMouseEnter={e => { e.currentTarget.style.background = "rgba(192,18,26,.22)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
                         onMouseLeave={e => { e.currentTarget.style.background = "linear-gradient(135deg,rgba(13,27,75,.48),rgba(4,8,15,.8))"; e.currentTarget.style.transform = ""; }}>
-                        {s.ic} {s.lb}
+                        <s.Icon size={15} /> {s.lb}
                     </a>
                 ))}
             </div>
@@ -1344,11 +1455,12 @@ const Contact = () => (
                 style={{
                     fontSize: "1rem", letterSpacing: 5, padding: "16px 44px", background: "#c0121a",
                     color: "#fff", border: "none", boxShadow: "0 6px 32px rgba(192,18,26,.5)",
-                    animation: "pulseR 2.5s ease-in-out infinite", transition: "transform .22s"
+                    animation: "pulseR 2.5s ease-in-out infinite", transition: "transform .22s",
+                    display: "inline-flex", alignItems: "center", gap: 12
                 }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px) scale(1.04)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
-                🕷 HIRE ME NOW
+                <FaSpider size={19} /> HIRE ME NOW
             </button>
         </div>
     </section>
