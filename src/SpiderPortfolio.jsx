@@ -4,7 +4,8 @@ import {
     FaGraduationCap, FaDraftingCompass,
     FaDumbbell, FaBookOpen, FaBullseye, FaHandshake,
     FaSpider, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaGithub,
-    FaReact, FaCss3Alt, FaJs, FaPhp, FaUserGraduate
+    FaReact, FaCss3Alt, FaJs, FaPhp, FaUserGraduate,
+    FaBriefcase, FaUsers, FaSchool, FaRocket, FaLock
 } from "react-icons/fa";
 import { SiMysql } from "react-icons/si";
 
@@ -243,7 +244,7 @@ const Emblem = ({ size = 100, className = "", style: s = {} }) => (
 /* ══════════════════════════════════════════════════════════
    REAL DATA — from Chhorn Vibol's CV
 ══════════════════════════════════════════════════════════ */
-const NAVS = ["HOME", "ABOUT", "SKILLS", "EDUCATION", "PROJECTS", "CONTACT"];
+const NAVS = ["HOME", "ABOUT", "SKILLS", "EDUCATION", "EXPERIENCE", "PROJECTS", "CONTACT"];
 
 const SKILLS_DATA = [
     {
@@ -285,39 +286,167 @@ const EDU_DATA = [
 
 const PROJ_DATA = [
     {
-        n: "01", tag: "HTML · CSS · Bootstrap · Tailwind",
-        title: "RESPONSIVE WEBSITES",
-        sub: "Front-End Development",
-        desc: "Designed and developed multiple responsive websites with clean, mobile-first layouts using Bootstrap and Tailwind CSS.",
+        n: "01", tag: "React · Node.js · Drizzle · Docker",
+        title: "FAQ HELP CENTER CMS",
+        sub: "Full-Stack Team Project — 2026",
+        desc: "Public FAQ help center plus CMS admin panel — search suggestions, content feedback, FAQ versioning and role-based visibility. React/Vite client, Node + Drizzle ORM, Docker + nginx.",
         col: "#c0121a", bg: "rgba(192,18,26,.07)",
+        url: "https://github.com/vibol18/faq-halp-center",
     },
     {
-        n: "02", tag: "JavaScript · ReactJS",
-        title: "INTERACTIVE UI",
-        sub: "Dynamic Components",
-        desc: "Built interactive front-end features including dynamic components, state management, and API-connected interfaces using JavaScript and ReactJS.",
+        n: "02", tag: "Spring Boot · React · Vue · Next.js",
+        title: "SCHOOL MANAGEMENT",
+        sub: "Full-Stack Team Project — 2025/26",
+        desc: "Academic platform: academics, timetable, exams & results, fees, library, hostel and transport — Spring Boot REST API with React, Vue and Next.js/TypeScript frontends.",
         col: "#1a2d6e", bg: "rgba(26,45,110,.07)",
+        url: "https://github.com/vibol18/school-Management",
     },
     {
-        n: "03", tag: "PHP · MySQL · Ajax",
-        title: "BACKEND INTEGRATION",
-        sub: "Full-Stack Connection",
-        desc: "Connected front-end interfaces with backend systems using PHP, MySQL for database management, and Ajax for asynchronous data handling.",
+        n: "03", tag: "Laravel · Spring Boot · Flutter · React",
+        title: "E-COMMERCE SUITE",
+        sub: "Multi-Stack Project — 2025/26",
+        desc: "The same storefront built across stacks — Laravel and Spring Boot backends with React/TypeScript web frontends and a Flutter mobile app.",
         col: "#8a6f0a", bg: "rgba(138,111,10,.06)",
+        url: "https://github.com/vibol18/laravel-ecommerce",
     },
     {
-        n: "04", tag: "Git · GitHub · Teamwork",
-        title: "TEAM PROJECT WORK",
-        sub: "Collaboration & Problem-Solving",
-        desc: "Practiced teamwork, debugging, and version control across collaborative academic projects — developing communication and problem-solving skills.",
+        n: "04", tag: "React · CodeMirror · Vite",
+        title: "LERNNINGCODE",
+        sub: "Learning Platform — 2026",
+        desc: "Interactive code-learning web app with a live CodeMirror editor for 20+ languages and syntax highlighting. Built with React + Vite.",
         col: "#0a5e3a", bg: "rgba(10,94,58,.07)",
+        url: "https://github.com/vibol18/lernningcode",
     },
+    {
+        n: "05", tag: "JavaScript · VS Code Extension API",
+        title: "MACOS TITLEBAR EXT",
+        sub: "VS Code Extension — 2026",
+        desc: "VS Code extension that replaces Linux window controls with macOS-style red/yellow/green traffic-light buttons. Packaged and installed as a .vsix — no re-injection needed after updates.",
+        col: "#c0121a", bg: "rgba(192,18,26,.07)",
+        url: null,
+    },
+    {
+        n: "06", tag: "Python · Ollama · FAISS · Streamlit",
+        title: "AI CHAT RAG",
+        sub: "Local AI Assistant — 2026",
+        desc: "Retrieval-augmented chatbot that runs 100% locally: upload PDF/DOCX/web documents, then ask questions — Ollama LLM + FAISS vector store, Streamlit UI.",
+        col: "#1a2d6e", bg: "rgba(26,45,110,.07)",
+        url: null,
+    },
+    {
+        n: "07", tag: "Python · Scikit-learn · LLM · Webapp",
+        title: "K-MEANS + LLM",
+        sub: "ML Clustering Project — 2026",
+        desc: "K-Means clustering of customer data with plots, an LLM-powered analysis layer and a small webapp interface.",
+        col: "#8a6f0a", bg: "rgba(138,111,10,.06)",
+        url: "https://github.com/vibol18/datascience",
+    },
+    {
+        n: "08", tag: "HTML · CSS · JavaScript · Bootstrap",
+        title: "ETEC WEB PROJECTS",
+        sub: "ETEC Coursework & Team Builds — 2025/26",
+        desc: "Dozens of responsive web builds from ETEC Center — flexbox layouts, Bootstrap/Tailwind sites and a team-built flexbox project with Git workflows.",
+        col: "#0a5e3a", bg: "rgba(10,94,58,.07)",
+        url: "https://github.com/vibol18/leesionHtml2",
+    },
+];
+
+const EXPERIENCE_DATA = [
+    {
+        yr: "2026",
+        role: "INTERN DEVELOPER — SCHOOL MANAGEMENT SYSTEM",
+        org: "ETEC Center · etecsys / school-management-2-back",
+        desc: "Contributed to ETEC's school-management backend — a Laravel application covering academics & enrollment, timetable, exams & results, assignments, fees & payments, library, hostel and transport modules, secured with JWT.",
+        badge: "INTERNSHIP",
+        icon: FaBriefcase,
+    },
+    {
+        yr: "2026",
+        role: "TEAM DEVELOPER — FAQ HELP CENTER CMS",
+        org: "Team project · github.com/vibol18/faq-halp-center",
+        desc: "Built a public FAQ help center plus CMS admin panel — search suggestions, content feedback, FAQ versioning with change summaries and role-based visibility. React/Vite frontend, Node + Drizzle ORM, Docker + nginx.",
+        badge: "TEAM PROJECT",
+        icon: FaUsers,
+    },
+    {
+        yr: "2025–2026",
+        role: "TEAM DEVELOPER — SCHOOL MANAGEMENT SYSTEM",
+        org: "Academic team project · github.com/vibol18/school-Management",
+        desc: "Full-stack school platform: Spring Boot REST API (Java) with React, Vue and Next.js/TypeScript frontends — student, teacher, parent and admin flows.",
+        badge: "TEAM PROJECT",
+        icon: FaSchool,
+    },
+    {
+        yr: "2025–Present",
+        role: "PERSONAL DEVELOPER — OPEN SOURCE & DEV TOOLS",
+        org: "Self-directed · 57 GitHub repositories",
+        desc: "Shipped 57+ public repos across JavaScript/TypeScript, Java, Python, PHP, Dart and C++ — including a VS Code extension (macos-titlebar-linux), an AI RAG chatbot and lernningcode, a React-based code-learning platform.",
+        badge: "PERSONAL",
+        icon: FaRocket,
+    },
+    {
+        yr: "2024–2025",
+        role: "WEB DEVELOPMENT — ETEC CENTER / NORTON UNIVERSITY",
+        org: "Coursework & team builds",
+        desc: "Team and individual web projects: flexbox layouts, responsive Bootstrap/Tailwind sites, React components and Git-based teamwork — the foundation of everything above.",
+        badge: "ACADEMIC",
+        icon: FaGraduationCap,
+    },
+];
+
+/* ══════ ALL PROJECTS — 56 GitHub repos + notable local-only projects ══════ */
+const LANG_COLORS = {
+    "JavaScript": "#f1e05a", "TypeScript": "#3178c6", "HTML": "#e34c26", "CSS": "#563d7c",
+    "Java": "#b07219", "Python": "#3572A5", "PHP": "#4F5D95", "C++": "#f34b7d",
+    "Dart": "#00B4AB", "Vue": "#41b883", "Shell": "#89e051", "—": "#8b949e",
+};
+
+const GH = n => `https://github.com/vibol18/${n}`;
+
+const GITHUB_REPOS = [
+    { n: "portfolio", lang: "JavaScript" }, { n: "lession_html", lang: "HTML" },
+    { n: "java_lession", lang: "Java" }, { n: "fllask_ecommerce", lang: "HTML" },
+    { n: "prepare_lession1", lang: "HTML" }, { n: "Spring_lesstion", lang: "Java" },
+    { n: "leesionHtml2", lang: "HTML" }, { n: "web_etec_6_7_Project", lang: "HTML" },
+    { n: "test-create", lang: "PHP" }, { n: "faq-halp-center", lang: "JavaScript" },
+    { n: "datascience", lang: "Python" }, { n: "prepare_lession", lang: "Java" },
+    { n: "archLinux", lang: "TypeScript" }, { n: "shop_etec_6_7", lang: "JavaScript" },
+    { n: "lernningcode", lang: "JavaScript" }, { n: "flexboxHtmlTeam_6_7", lang: "HTML" },
+    { n: "ecommerce_web_front", lang: "HTML" }, { n: "school_next_ts", lang: "TypeScript" },
+    { n: "ecommerce_frontent", lang: "TypeScript" }, { n: "laravel-ecommerce", lang: "PHP" },
+    { n: "ecommerce_Spring", lang: "Java" }, { n: "ecommerce_app", lang: "Dart" },
+    { n: "web_ecoomerce_6_7_15", lang: "HTML" }, { n: "js-lession", lang: "HTML" },
+    { n: "cppApi", lang: "C++" }, { n: "lessionhtml", lang: "HTML" },
+    { n: "AI-agent", lang: "—" }, { n: "CppLession", lang: "C++" }, { n: "flask_ai", lang: "Dart" },
+    { n: "school-Management_react", lang: "JavaScript" }, { n: "website_team_MI1", lang: "HTML" },
+    { n: "shop_NU", lang: "—" }, { n: "school-Management", lang: "Java" },
+    { n: "Bolxtrade", lang: "HTML" }, { n: "school_management_vue_team", lang: "Vue" },
+    { n: "ecommerce_team", lang: "JavaScript" }, { n: "wedding", lang: "Vue" },
+    { n: "ecommerce_react_with-Spring", lang: "JavaScript" }, { n: "vuetest", lang: "Vue" },
+    { n: "ecommerce_py", lang: "Python" }, { n: "my-portfelio", lang: "JavaScript" },
+    { n: "admin2", lang: "JavaScript" }, { n: "portfelio", lang: "JavaScript" },
+    { n: "lessonjsx", lang: "JavaScript" }, { n: "ecomersfakeapi", lang: "JavaScript" },
+    { n: "all-file", lang: "JavaScript" }, { n: "seller", lang: "HTML" },
+    { n: "kak", lang: "HTML" }, { n: "payment", lang: "Python" },
+    { n: "qrcodescan", lang: "HTML" }, { n: "school-test", lang: "JavaScript" },
+    { n: "abtme", lang: "PHP" }, { n: "bol-shop", lang: "HTML" },
+    { n: "file", lang: "HTML" }, { n: "shopforresell", lang: "HTML" },
+    { n: "kaishop168", lang: "HTML" },
+];
+
+const LOCAL_PROJECTS = [
+    { n: "macos-titlebar-linux", lang: "JavaScript", d: "VS Code extension (.vsix) — macOS traffic-light window controls on Linux" },
+    { n: "ai-chat", lang: "Python", d: "Local RAG chatbot — Streamlit + Ollama + FAISS, upload docs & chat" },
+    { n: "kmeans-clustering", lang: "Python", d: "K-Means customer clustering with LLM analysis and a webapp" },
+    { n: "PyBot-AI / py_to_Ai", lang: "Python", d: "AI engineering learning path — Python agents, models and notebooks" },
+    { n: "wedevelopment_morning_nu", lang: "HTML", d: "Norton University — Web Development morning class sites" },
+    { n: "etetcAi", lang: "Python", d: "NLP/chatbot training pipeline — intents, model and training scripts" },
 ];
 
 const STATS_DATA = [
     { v: "2", l: "Universities" },
     { v: "7+", l: "Tech Skills" },
-    { v: "4+", l: "Projects Built" },
+    { v: "57+", l: "GitHub Repos" },
     { v: "∞", l: "Eagerness to Learn" },
 ];
 
@@ -1309,6 +1438,41 @@ const Education = () => (
     </section>
 );
 
+/* ══════ EXPERIENCE — timeline ══════ */
+const Experience = () => (
+    <section id="experience" style={{ position: "relative", zIndex: 10, padding: "100px 24px", maxWidth: 860, margin: "0 auto" }}>
+        <ST pre="MY" acc="EXPERIENCE" />
+        <div style={{ position: "relative", paddingLeft: 58 }}>
+            <div className="tl-line" />
+            {EXPERIENCE_DATA.map((x, i) => (
+                <div key={i} className="rv" style={{ position: "relative", marginBottom: i < EXPERIENCE_DATA.length - 1 ? 34 : 0, animationDelay: i * .14 + "s" }}>
+                    <div style={{
+                        position: "absolute", left: -58, top: 16, width: 44, height: 44, borderRadius: "50%",
+                        background: "linear-gradient(135deg,#c0121a,#0d1b4b)", border: "2px solid #f5c842",
+                        boxShadow: "0 0 18px rgba(192,18,26,.5)",
+                        display: "flex", alignItems: "center", justifyContent: "center"
+                    }}>
+                        <x.icon size={20} color="#f0f0f0" />
+                    </div>
+                    <div className="ccsm card-pro" style={{
+                        padding: "22px 26px",
+                        background: "linear-gradient(135deg,rgba(13,27,75,.2),rgba(4,8,15,.72))",
+                        border: "1px solid rgba(192,18,26,.2)", borderLeft: "3px solid #c0121a"
+                    }}>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 10 }}>
+                            <span className="fj tag">{x.yr}</span>
+                            <span className="tag" style={{ borderColor: "rgba(245,200,66,.28)", background: "rgba(245,200,66,.06)", color: "#f5c842" }}>{x.badge}</span>
+                        </div>
+                        <div className="fb" style={{ fontSize: "1.2rem", letterSpacing: 2, color: "#f0f0f0", marginBottom: 4 }}>{x.role}</div>
+                        <div className="fbn" style={{ fontSize: ".85rem", letterSpacing: 3, color: "#c0121a", marginBottom: 10 }}>{x.org}</div>
+                        <p className="fr" style={{ fontSize: ".9rem", lineHeight: 1.75, color: "rgba(240,240,240,.62)" }}>{x.desc}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+);
+
 /* ══════════════════════════════════════════════════════════
    PROJECTS — 180° flip cards
 ══════════════════════════════════════════════════════════ */
@@ -1353,24 +1517,88 @@ const ProjCard = ({ p, i }) => (
                 <div className="fbn" style={{ fontSize: ".85rem", letterSpacing: 4, color: "#f5c842", marginBottom: 14 }}>{p.sub}</div>
                 <div style={{ width: 44, height: 2, background: `linear-gradient(to right,transparent,${p.col},transparent)`, margin: "0 auto 14px" }} />
                 <p className="fr" style={{ fontSize: ".86rem", lineHeight: 1.7, color: "rgba(240,240,240,.8)", marginBottom: 18 }}>{p.desc}</p>
-                <a href="#" data-c className="fj chex"
-                    style={{
-                        fontSize: ".7rem", letterSpacing: 3, padding: "8px 20px",
-                        background: p.col, color: "#fff", textDecoration: "none", display: "inline-block"
-                    }}>
-                    VIEW PROJECT →
-                </a>
+                {p.url
+                    ? <a href={p.url} target="_blank" rel="noopener noreferrer" data-c className="fj chex"
+                        style={{
+                            fontSize: ".7rem", letterSpacing: 3, padding: "8px 20px",
+                            background: p.col, color: "#fff", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8
+                        }}>
+                        <FaGithub size={13} /> VIEW ON GITHUB →
+                    </a>
+                    : <span className="fj chex"
+                        style={{
+                            fontSize: ".62rem", letterSpacing: 3, padding: "9px 18px", display: "inline-flex", alignItems: "center", gap: 8,
+                            background: "rgba(240,240,240,.06)", border: `1px solid ${p.col}`, color: "rgba(240,240,240,.6)"
+                        }}>
+                        <FaLock size={11} /> LOCAL PROJECT
+                    </span>}
             </div>
+        </div>
+    </div>
+);
+
+const RepoTile = ({ r }) => (
+    <a href={GH(r.n)} target="_blank" rel="noopener noreferrer" data-c className="ccsm"
+        style={{
+            display: "flex", alignItems: "center", gap: 8, textDecoration: "none",
+            padding: "9px 12px", background: "rgba(13,27,75,.22)",
+            border: "1px solid rgba(192,18,26,.16)", color: "rgba(240,240,240,.72)",
+            transition: "border-color .2s, background .2s"
+        }}
+        onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(245,200,66,.4)"; e.currentTarget.style.background = "rgba(192,18,26,.1)"; }}
+        onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(192,18,26,.16)"; e.currentTarget.style.background = "rgba(13,27,75,.22)"; }}>
+        <FaGithub size={12} style={{ flexShrink: 0, opacity: .55 }} />
+        <span className="fj" style={{ fontSize: ".6rem", letterSpacing: .5, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", flex: 1 }}>{r.n}</span>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 4, flexShrink: 0 }}>
+            <span style={{ width: 8, height: 8, borderRadius: "50%", background: LANG_COLORS[r.lang] || "#8b949e" }} />
+            <span className="fj" style={{ fontSize: ".52rem", color: "rgba(240,240,240,.38)" }}>{r.lang}</span>
+        </span>
+    </a>
+);
+
+const AllProjects = () => (
+    <div style={{ marginTop: 72 }}>
+        <div style={{ textAlign: "center", marginBottom: 28 }}>
+            <div className="fj rv" style={{ fontSize: ".6rem", letterSpacing: 6, color: "rgba(245,200,66,.5)", textTransform: "uppercase", marginBottom: 8 }}>
+                ── FULL COLLECTION ──
+            </div>
+            <h3 className="fb rv" style={{ fontSize: "clamp(1.5rem,4vw,2.4rem)", letterSpacing: 4, color: "#f0f0f0" }}>
+                ALL MY <span style={{ color: "#c0121a" }}>PROJECTS</span>
+            </h3>
+            <p className="fr rv" style={{ fontSize: ".85rem", color: "rgba(240,240,240,.45)", marginTop: 6 }}>
+                Every public repository on GitHub + notable projects built on my machine.
+            </p>
+        </div>
+        <div className="fj rv" style={{ fontSize: ".62rem", letterSpacing: 5, color: "#c0121a", textTransform: "uppercase", marginBottom: 12, display: "flex", alignItems: "center", gap: 10 }}>
+            <FaGithub size={14} /> GITHUB REPOSITORIES ({GITHUB_REPOS.length})
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(180px,1fr))", gap: 8, marginBottom: 28 }}>
+            {GITHUB_REPOS.map(r => <RepoTile key={r.n} r={r} />)}
+        </div>
+        <div className="fj rv" style={{ fontSize: ".62rem", letterSpacing: 5, color: "#c0121a", textTransform: "uppercase", marginBottom: 12, display: "flex", alignItems: "center", gap: 10 }}>
+            <FaLock size={12} /> LOCAL PROJECTS ({LOCAL_PROJECTS.length})
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))", gap: 8 }}>
+            {LOCAL_PROJECTS.map(p => (
+                <div key={p.n} className="ccsm" style={{ padding: "12px 14px", background: "rgba(13,27,75,.22)", border: "1px solid rgba(245,200,66,.14)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
+                        <span style={{ width: 8, height: 8, borderRadius: "50%", background: LANG_COLORS[p.lang] || "#8b949e", flexShrink: 0 }} />
+                        <span className="fj" style={{ fontSize: ".64rem", letterSpacing: .5, color: "rgba(240,240,240,.82)" }}>{p.n}</span>
+                    </div>
+                    <p className="fr" style={{ fontSize: ".74rem", lineHeight: 1.5, color: "rgba(240,240,240,.5)" }}>{p.d}</p>
+                </div>
+            ))}
         </div>
     </div>
 );
 
 const Projects = () => (
     <section id="projects" style={{ position: "relative", zIndex: 10, padding: "100px 24px", maxWidth: 1200, margin: "0 auto" }}>
-        <ST pre="ACADEMIC" acc="PROJECTS" />
+        <ST pre="FEATURED" acc="PROJECTS" />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 22 }}>
             {PROJ_DATA.map((p, i) => <ProjCard key={p.n} p={p} i={i} />)}
         </div>
+        <AllProjects />
     </section>
 );
 
@@ -1509,6 +1737,8 @@ export default function App() {
                 <Skills />
                 <div className="divider" />
                 <Education />
+                <div className="divider" />
+                <Experience />
                 <div className="divider" />
                 <Projects />
                 <div className="divider" />
