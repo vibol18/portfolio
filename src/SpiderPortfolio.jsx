@@ -427,7 +427,7 @@ const GITHUB_REPOS = [
     { n: "admin2", lang: "JavaScript" }, { n: "portfelio", lang: "JavaScript" },
     { n: "lessonjsx", lang: "JavaScript" }, { n: "ecomersfakeapi", lang: "JavaScript" },
     { n: "all-file", lang: "JavaScript" }, { n: "seller", lang: "HTML" },
-    { n: "kak", lang: "HTML" }, { n: "payment", lang: "Python" },
+    { n: "payment", lang: "Python" },
     { n: "qrcodescan", lang: "HTML" }, { n: "school-test", lang: "JavaScript" },
     { n: "abtme", lang: "PHP" }, { n: "bol-shop", lang: "HTML" },
     { n: "file", lang: "HTML" }, { n: "shopforresell", lang: "HTML" },
